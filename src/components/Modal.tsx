@@ -1,7 +1,7 @@
 import React from 'react';
 
-// interface ModalProps {  
-// }
+interface ModalProps {
+}
 
 const Modal: FunctionComponent<ModalProps> = () => {
   return (

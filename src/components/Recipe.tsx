@@ -6,14 +6,18 @@ import Icons from '../img/icons.svg';
 
 const Recipe = () => {
   return (
-    <div className="recipe">
-      <div className="message">
-        <div>
-          <svg>
-            <use href={`${Icons}#icon-smile`}></use>
-          </svg>
+    <div>
+      <div
+        className="recipe"
+      >
+        <div className="message">
+          <div>
+            <svg>
+              <use href={`${Icons}#icon-smile`}></use>
+            </svg>
+          </div>
+          <p>Start by searching for a recipe or an ingredient. Have fun!</p>
         </div>
-        <p>Start by searching for a recipe or an ingredient. Have fun!</p>
       </div>
 
       {/* <div className="spinner">
