@@ -1,34 +1,24 @@
-import React from 'react'
-import Favicon from '../img/favicon.png'
+import React, { useEffect, useState } from 'react';
+import Item from './SearchResults/Item';
+import Recipe from './Recipe';
 
 // interface SearchResultsProps {
 // }
 
-const SearchResults: FunctionComponent<SearchResultsProps> = () => {
-  const recipeClick = e => {
-    console.log('Recipe clicked')
-  }
+const SearchResults: FunctionComponent<SearchResultsProps> = ({ fetchRecipe, displayRecipe }) => {
+  // const [displayRecipe, setDisplayRecipe] = useState('')
+  useEffect(() => {
+    console.log(displayRecipe)
+  },
+    [displayRecipe])
+
   return (
-    <div
-      className="search-results"
-      onClick={recipeClick}
-    >
+    <div className="search-results">
       <ul className="results">
-        <li className="preview">
-          <a className="preview__link preview__link--active" href="#23456">
-            <figure className="preview__fig">
-              <img src={Favicon} alt="Test" />
-            </figure>
-            <div className="preview__data">
-              <h4 className="preview__title">Pasta with Tomato Cream ...</h4>
-              <p className="preview__publisher">The Pioneer Woman</p>
-              <div className="preview__user-generated">
-                <svg>
-                  <use href="src/img/icons.svg#icon-user"></use>
-                </svg>
-              </div>
-            </div>
-          </a>
+        <li className="preview" onClick={fetchRecipe}>
+          <Item
+            recipe={displayRecipe}
+          />
         </li>
       </ul>
     </div>
