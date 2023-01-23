@@ -14,7 +14,9 @@ interface Props {
 }
 
 const App = ({ name }) => {
-  const [displayRecipe, setDisplayRecipe] = useState('')
+  const [loading, setLoading] = useState(true);
+  const [color, setColor] = useState('#ffffff')
+  const [displayRecipe, setDisplayRecipe] = useState('');
   // const timeout = function (s) {
   //   return new Promise(function (_, reject) {
   //     setTimeout(function () {
@@ -36,14 +38,14 @@ const App = ({ name }) => {
 
       let { recipe } = data.data;
 
-      // console.log(recipe);
+      console.log(recipe);
 
       recipe = {
         id: recipe.id,
         title: recipe.title,
         publisher: recipe.publisher,
         sourceUrl: recipe.sourceUrl,
-        image: recipe.image,
+        image: recipe.image_url,
         servings: recipe.servings,
         cookingTime: recipe.cookingTime,
         ingredients: recipe.ingredients,

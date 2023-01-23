@@ -4,12 +4,12 @@ import * as React from 'react';
 
 // }
 
-const RecipeFigure: FunctionComponent<RecipeFigureProps> = () => {
+const RecipeFigure: FunctionComponent<RecipeFigureProps> = ({ displayRecipe }) => {
     return (
         <figure className="recipe__fig">
-            <img src="src/img/test-1.jpg" alt="Tomato" className="recipe__img" />
+            <img src={displayRecipe.image} alt={displayRecipe.title} className="recipe__img" />
             <h1 className="recipe__title">
-                <span>Pasta with tomato cream sauce</span>
+                <span>{displayRecipe.title}</span>
             </h1>
         </figure>
     );

@@ -7,28 +7,13 @@ import RecipeDirections from './Recipe/RecipeDirections';
 // interface RecipeProps {
 // }
 
-const Recipe = (displayRecipe) => {
+const Recipe = ({ displayRecipe }) => {
   return (
     <div>
-      {/* <div className="spinner">
-    <svg>
-      <use href="src/img/icons.svg#icon-loader"></use>
-    </svg>
-  </div> */}
-
-      {/* <div className="error">
-      <div>
-        <svg>
-          <use href="src/img/icons.svg#icon-alert-triangle"></use>
-        </svg>
-      </div>
-      <p>No recipes found for your query. Please try again!</p>
-    </div> */}
-
-      <RecipeFigure />
-      <RecipeDetails />
-      <RecipeIngredients />
-      <RecipeDirections />
+      <RecipeFigure displayRecipe={displayRecipe} />
+      <RecipeDetails displayRecipe={displayRecipe} />
+      <RecipeIngredients displayRecipe={displayRecipe} />
+      <RecipeDirections displayRecipe={displayRecipe} />
 
     </div >
   );
