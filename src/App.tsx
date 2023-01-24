@@ -62,7 +62,9 @@ const App = ({ name }) => {
     <div className="container">
       <Header />
       <SearchResults fetchRecipe={fetchRecipe} displayRecipe={displayRecipe} />
-      {displayRecipe ? <Recipe displayRecipe={displayRecipe} /> : <RecipePlaceholder />}
+      {displayRecipe ?
+        <Recipe displayRecipe={displayRecipe} /> :
+        <RecipePlaceholder />}
       <Copyright />
       <PaginationButtons />
       <Modal />

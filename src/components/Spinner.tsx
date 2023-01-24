@@ -1,27 +1,29 @@
 import React from 'react'
+import { RingLoader } from 'react-spinners';
 
 // interface Props {
 
 // }
 
-const : FunctionComponent<Props> = () => {
+const override = {
+    position: "relative",
+    // display: "block",
+    margin: "0 auto",
+    top: "25%",
+    borderColor: "red",
+}
+
+const Spinner: FunctionComponent<Props> = ({ loading }) => {
     return (
-    <div className="spinner">
-        <svg>
-            <use href="src/img/icons.svg#icon-loader"></use>
-        </svg>
-    </div>
-
-    {/* <div className="error">
-      <div>
-        <svg>
-          <use href="src/img/icons.svg#icon-alert-triangle"></use>
-        </svg>
-      </div>
-      <p>No recipes found for your query. Please try again!</p>
-    </div> */}
-
+        <RingLoader
+            color={'white'}
+            loading={loading}
+            cssOverride={override}
+            // size={50}
+            aria-label='Image is now loading'
+            data-testid={'loader'}
+        />
     );
 }
 
-    export default ;
+export default Spinner;

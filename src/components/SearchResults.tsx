@@ -20,9 +20,23 @@ const SearchResults: FunctionComponent<SearchResultsProps> = ({ fetchRecipe, dis
             recipe={displayRecipe}
           />
         </li>
+        <li className="preview" onClick={fetchRecipe}>
+          <Item
+            recipe={displayRecipe}
+          />
+        </li>
       </ul>
     </div>
   );
+  {/* <div className="error">
+      <div>
+        <svg>
+          <use href="src/img/icons.svg#icon-alert-triangle"></use>
+        </svg>
+      </div>
+      <p>No recipes found for your query. Please try again!</p>
+    </div> */}
+
 }
 
 export default SearchResults;
