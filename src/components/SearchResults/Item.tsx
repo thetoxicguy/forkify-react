@@ -5,10 +5,8 @@ import Favicon from '../../img/favicon.png';
 //   id: string
 // }
 
-const Item: FunctionComponent<ItemProps> = () => {
-  // const recipeClick = e => {
-  //   console.log({ props })
-  // }
+const Item: FunctionComponent<ItemProps> = ({ recipe }) => {
+  // console.log(recipe)
   return (
     <div>
       <a
@@ -19,8 +17,8 @@ const Item: FunctionComponent<ItemProps> = () => {
           <img src={Favicon} alt="Test" />
         </figure>
         <div className="preview__data">
-          <h4 className="preview__title">Pasta with Tomato Cream ...</h4>
-          <p className="preview__publisher">The Pioneer Woman</p>
+          <h4 className="preview__title">{recipe.title}</h4>
+          <p className="preview__publisher">{recipe.publisher}</p>
           <div className="preview__user-generated">
             <svg>
               <use href="src/img/icons.svg#icon-user"></use>

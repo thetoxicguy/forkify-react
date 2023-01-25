@@ -3,11 +3,10 @@ import React, { useState } from 'react';
 import Logo from '../img/logo.png';
 import Icons from '../img/icons.svg';
 
-const Header = () => {
+const Header = ({ fetchQuery }) => {
   const [searchText, setSearchText] = useState('')
   const handleChange = e => {
     setSearchText(e.target.value)
-    console.log(e.target.value)
   }
   return (
     <header className="header">
@@ -20,7 +19,7 @@ const Header = () => {
           onChange={handleChange}
           value={searchText}
         />
-        <button className="btn search__btn">
+        <button className="btn search__btn" onClick={() => fetchQuery(searchText)}>
           <svg className="search__icon">
             <use href={`${Icons}#icon-search`}></use>
           </svg>

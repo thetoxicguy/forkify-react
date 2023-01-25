@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import SearchResults from './components/SearchResults';
 import PaginationButtons from './components/PaginationButtons';
@@ -17,51 +17,65 @@ const App = ({ name }) => {
   const [loading, setLoading] = useState(true);
   const [color, setColor] = useState('#ffffff')
   const [displayRecipe, setDisplayRecipe] = useState('');
-  // const timeout = function (s) {
-  //   return new Promise(function (_, reject) {
-  //     setTimeout(function () {
-  //       reject(new Error(`Request took too long! Timeout after ${s} second`));
-  //     }, s * 1000);
-  //   });
-  // };
-  const fetchRecipe = async () => {
-    try {
-      const res = await fetch(
-        'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
-      );
-      // const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza')
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(`${data.message} (${res.status})`);
-      }
-      // console.log(res, data);
+  const [searchArr, setSearchArr] = useState('')
+  useEffect(() => { console.log(`${searchArr.length} recipes`) }, [searchArr])
 
-      let { recipe } = data.data;
+  const fetchQuery = async (searchText) => {
+    fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${searchText}`)
+      .then(res => res.json())
+      .then(data => setSearchArr(data.data.recipes))
+      .catch(err => { throw new Error(err) })
+  }
 
-      console.log(recipe);
+  const fetchRecipe = async id => {
+    // 5ed6604591c37cdc054bc886
+    fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`)
+      .then(res => res.json())
+      .then(data =>
+        setDisplayRecipe({
+          id: data.data.recipe.id,
+          title: data.data.recipe.title,
+          publisher: data.data.recipe.publisher,
+          sourceUrl: data.data.recipe.sourceUrl,
+          image: data.data.recipe.image_url,
+          servings: data.data.recipe.servings,
+          cookingTime: data.data.recipe.cookingTime,
+          ingredients: data.data.recipe.ingredients,
+        })
+      )
+      .catch(err => { throw new Error(err) })
+    // try {
+    //   const res = await fetch(
+    //     'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
+    //   );
+    //   const data = await res.json();
+    //   if (!res.ok) {
+    //     throw new Error(`${data.message} (${res.status})`);
+    //   }
 
-      recipe = {
-        id: recipe.id,
-        title: recipe.title,
-        publisher: recipe.publisher,
-        sourceUrl: recipe.sourceUrl,
-        image: recipe.image_url,
-        servings: recipe.servings,
-        cookingTime: recipe.cookingTime,
-        ingredients: recipe.ingredients,
-      };
+    //   let { recipe } = data.data;
 
-      setDisplayRecipe(recipe)
-    } catch (err) {
-      alert(err);
-    }
+    //   recipe = {
+    //     id: recipe.id,
+    //     title: recipe.title,
+    //     publisher: recipe.publisher,
+    //     sourceUrl: recipe.sourceUrl,
+    //     image: recipe.image_url,
+    //     servings: recipe.servings,
+    //     cookingTime: recipe.cookingTime,
+    //     ingredients: recipe.ingredients,
+    //   };
+    //   setDisplayRecipe(recipe)
+    // } catch (err) {
+    //   alert(err);
+    // }
   }
 
 
   return (
     <div className="container">
-      <Header />
-      <SearchResults fetchRecipe={fetchRecipe} displayRecipe={displayRecipe} />
+      <Header fetchQuery={fetchQuery} />
+      <SearchResults fetchRecipe={fetchRecipe} searchArr={searchArr} />
       {displayRecipe ?
         <Recipe displayRecipe={displayRecipe} /> :
         <RecipePlaceholder />}

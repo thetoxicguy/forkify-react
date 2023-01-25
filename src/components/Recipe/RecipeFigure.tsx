@@ -16,7 +16,6 @@ const RecipeFigure: FunctionComponent<RecipeFigureProps> = ({ displayRecipe }) =
     const [loading, setLoading] = useState(true);
     const hanleLoadedImage = () => {
         setLoading(false)
-        console.log('Image loaded')
     }
     return (
         <figure className="recipe__fig">

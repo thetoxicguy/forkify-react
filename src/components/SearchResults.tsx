@@ -5,27 +5,30 @@ import Recipe from './Recipe';
 // interface SearchResultsProps {
 // }
 
-const SearchResults: FunctionComponent<SearchResultsProps> = ({ fetchRecipe, displayRecipe }) => {
+const SearchResults: FunctionComponent<SearchResultsProps> = ({ fetchRecipe, searchArr }) => {
   // const [displayRecipe, setDisplayRecipe] = useState('')
-  useEffect(() => {
-    console.log(displayRecipe)
-  },
-    [displayRecipe])
+  // useEffect(() => {
+  //   console.log(displayRecipe)
+  // },
+  //   [displayRecipe])
 
   return (
     <div className="search-results">
-      <ul className="results">
-        <li className="preview" onClick={fetchRecipe}>
-          <Item
-            recipe={displayRecipe}
-          />
-        </li>
-        <li className="preview" onClick={fetchRecipe}>
-          <Item
-            recipe={displayRecipe}
-          />
-        </li>
-      </ul>
+      {
+        searchArr ?
+          <ul className="results">
+            {
+              searchArr.map((recipe, i) =>
+                <li key={i} className="preview" onClick={() => fetchRecipe(recipe.id)}>
+                  <Item
+                    recipe={recipe}
+                  />
+                </li>
+              )
+            }
+          </ul> :
+          ''
+      }
     </div>
   );
   {/* <div className="error">
