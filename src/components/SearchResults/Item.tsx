@@ -1,5 +1,6 @@
 import React from 'react';
 import Favicon from '../../img/favicon.png';
+import Icons from '../../img/icons.svg';
 
 // interface ItemProps {
 //   id: string
@@ -21,12 +22,12 @@ const Item: FunctionComponent<ItemProps> = ({ recipe }) => {
           <p className="preview__publisher">{recipe.publisher}</p>
           <div className="preview__user-generated">
             <svg>
-              <use href="src/img/icons.svg#icon-user"></use>
+              <use href={`${Icons}#icon-user`}></use>
             </svg>
           </div>
         </div>
-      </a>
-    </div>
+      </a >
+    </div >
   );
 }
 
