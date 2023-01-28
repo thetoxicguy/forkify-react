@@ -77,7 +77,6 @@ const App: FC = () => {
       .catch(err => { throw new Error(err) })
   }
 
-
   return (
     <div className="container">
       <Header fetchQuery={fetchQuery} />

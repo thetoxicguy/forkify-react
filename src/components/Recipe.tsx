@@ -28,6 +28,7 @@ interface RecipeProps {
 }
 
 const Recipe: React.FC<RecipeProps> = ({ displayRecipe }) => {
+  console.log(displayRecipe);
   return (
     <div>
       <RecipeFigure displayRecipe={displayRecipe} />
