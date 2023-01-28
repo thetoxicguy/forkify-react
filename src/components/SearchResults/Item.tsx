@@ -1,12 +1,19 @@
-import React from 'react';
+import * as React from 'react';
 import Favicon from '../../img/favicon.png';
 import Icons from '../../img/icons.svg';
 
-// interface ItemProps {
-//   id: string
-// }
+type Recipe = {
+  publisher: string,
+  image: string,
+  title: string,
+  id: string,
+}
 
-const Item: FunctionComponent<ItemProps> = ({ recipe }) => {
+interface ItemProps {
+  recipe: Recipe
+}
+
+const Item: React.FC<ItemProps> = ({ recipe }) => {
   // console.log(recipe)
   return (
     <div>

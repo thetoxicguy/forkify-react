@@ -1,11 +1,30 @@
 import * as React from 'react';
 import Icons from '../../img/icons.svg';
 
-// interface RecipeDetailsProps {
+type DisplayRecipe =
+    | ''
+    | {
+        id: string,
+        title: string,
+        publisher: string,
+        sourceUrl: string,
+        image: string,
+        servings: string,
+        cookingTime: string,
+        ingredients: [
+            {
+                quantity: number,
+                unit: string,
+                description: string,
+            }
+        ],
+    }
 
-// }
+interface RecipeDetailsProps {
+    displayRecipe: DisplayRecipe
+}
 
-const RecipeDetails: FunctionComponent<RecipeDetailsProps> = ({ displayRecipe }) => {
+const RecipeDetails: React.FC<RecipeDetailsProps> = ({ displayRecipe }) => {
     return (
         <div className="recipe__details">
             <div className="recipe__info">
@@ -13,7 +32,7 @@ const RecipeDetails: FunctionComponent<RecipeDetailsProps> = ({ displayRecipe })
                     <use href={`${Icons}#icon-clock`}></use>
                 </svg>
                 <span className="recipe__info-data recipe__info-data--minutes">
-                    {displayRecipe.cookingTime ? displayRecipe.cookingTime : 'unknown amount of'}
+                    {typeof displayRecipe === 'string' ? 'unknown amount of' : displayRecipe.cookingTime}
                 </span>
                 <span className="recipe__info-text">minutes</span>
             </div>
@@ -21,7 +40,9 @@ const RecipeDetails: FunctionComponent<RecipeDetailsProps> = ({ displayRecipe })
                 <svg className="recipe__info-icon">
                     <use href={`${Icons}#icon-users`}></use>
                 </svg>
-                <span className="recipe__info-data recipe__info-data--people">{displayRecipe.servings}</span>
+                <span className="recipe__info-data recipe__info-data--people">{
+                    typeof displayRecipe === 'string' ? '' : displayRecipe.servings
+                }</span>
                 <span className="recipe__info-text">servings</span>
 
                 <div className="recipe__info-buttons">

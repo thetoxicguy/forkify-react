@@ -1,11 +1,10 @@
 import * as React from 'react';
 import Icons from '../img/icons.svg';
+interface RecipePlaceholderProps {
+    name: string,
+}
 
-// interface RecipePlaceholderProps {
-
-// }
-
-const RecipePlaceholder: FunctionComponent<RecipePlaceholderProps> = () => {
+const RecipePlaceholder: React.FC<RecipePlaceholderProps> = ({ name }) => {
     return (
         <div
             className="recipe"
@@ -16,7 +15,7 @@ const RecipePlaceholder: FunctionComponent<RecipePlaceholderProps> = () => {
                         <use href={`${Icons}#icon-smile`}></use>
                     </svg>
                 </div>
-                <p>Start by searching for a recipe or an ingredient. Have fun!</p>
+                <p>Hello {name}, start by searching for a recipe or an ingredient. Have fun!</p>
             </div>
         </div>
 

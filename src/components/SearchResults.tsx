@@ -1,11 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Item from './SearchResults/Item';
 import Recipe from './Recipe';
 
-// interface SearchResultsProps {
-// }
+type FetchFunction = (a: string) => void
+type SearchArray = (
+  [{
+    publisher: string,
+    image: string,
+    title: string,
+    id: string,
+  }] | ''
+)
 
-const SearchResults: FunctionComponent<SearchResultsProps> = ({ fetchRecipe, searchArr }) => {
+interface SearchResultsProps {
+  fetchRecipe: FetchFunction
+  searchArr: SearchArray
+}
+
+const SearchResults: React.FC<SearchResultsProps> = ({ fetchRecipe, searchArr }) => {
   // const [displayRecipe, setDisplayRecipe] = useState('')
   // useEffect(() => {
   //   console.log(displayRecipe)

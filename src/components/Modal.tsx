@@ -1,9 +1,8 @@
-import React from 'react';
-
+import * as React from 'react';
 interface ModalProps {
 }
 
-const Modal: FunctionComponent<ModalProps> = () => {
+const Modal: React.FC<ModalProps> = () => {
   return (
     <>
       <div className="overlay hidden"></div><div className="add-recipe-window hidden">

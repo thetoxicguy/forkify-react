@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 
 import Logo from '../img/logo.png';
 import Icons from '../img/icons.svg';
 
-const Header = ({ fetchQuery }) => {
+interface HeaderProps {
+  fetchQuery: (a: string) => void
+}
+
+const Header: React.FC<HeaderProps> = ({ fetchQuery }) => {
   const [searchText, setSearchText] = useState('')
   const handleChange = e => {
     setSearchText(e.target.value)

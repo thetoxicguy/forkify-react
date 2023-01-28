@@ -1,10 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 
-// interface PaginationButtonsProps {
+interface PaginationButtonsProps {
+}
 
-// }
-
-const PaginationButtons = () => {
+const PaginationButtons: React.FC<PaginationButtonsProps> = () => {
   return (
     <div className="pagination">
       {/* <button className="btn--inline pagination__btn--prev">

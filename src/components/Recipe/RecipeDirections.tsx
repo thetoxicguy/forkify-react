@@ -1,21 +1,44 @@
-import React from 'react'
+import * as React from 'react';
 
-// interface RecipeDirectionsProps {
+type DisplayRecipe =
+    | ''
+    | {
+        id: string,
+        title: string,
+        publisher: string,
+        sourceUrl: string,
+        image: string,
+        servings: string,
+        cookingTime: string,
+        ingredients: [
+            {
+                quantity: number,
+                unit: string,
+                description: string,
+            }
+        ],
+    }
 
-// }
+interface RecipeDirectionsProps {
+    displayRecipe: DisplayRecipe
+}
 
-const RecipeDirections: FunctionComponent<RecipeDirectionsProps> = ({ displayRecipe }) => {
+const RecipeDirections: React.FC<RecipeDirectionsProps> = ({ displayRecipe }) => {
     return (
         <div className="recipe__directions">
             <h2 className="heading--2">How to cook it</h2>
             <p className="recipe__directions-text">
                 This recipe was carefully designed and tested by {' '}
-                <span className="recipe__publisher">{displayRecipe.publisher}</span>. Please check out
+                <span className="recipe__publisher">{
+                    typeof displayRecipe === 'string' ? 'Unknown' : displayRecipe.publisher
+                }</span>. Please check out
                 directions at their website.
             </p>
             <a
                 className="btn--small recipe__btn"
-                href={displayRecipe.sourceUrl}
+                href={
+                    typeof displayRecipe === 'string' ? '' : displayRecipe.sourceUrl
+                }
                 target="_blank"
             >
                 <span>Directions</span>

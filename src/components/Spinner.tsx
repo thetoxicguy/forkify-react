@@ -1,11 +1,12 @@
-import React from 'react'
+import * as React from 'react'
+import { CSSProperties } from 'react';
 import { RingLoader } from 'react-spinners';
 
-// interface Props {
+interface SpinnerProps {
+    loading: boolean
+}
 
-// }
-
-const override = {
+const override: CSSProperties = {
     position: "relative",
     // display: "block",
     margin: "0 auto",
@@ -13,7 +14,7 @@ const override = {
     borderColor: "red",
 }
 
-const Spinner: FunctionComponent<Props> = ({ loading }) => {
+const Spinner: React.FC<SpinnerProps> = ({ loading }) => {
     return (
         <RingLoader
             color={'white'}
