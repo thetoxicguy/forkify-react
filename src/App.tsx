@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios'
 import { useGetRecipesListQuery, useGetRecipeQuery } from './services/forkify';
 import { FC, useEffect, useState } from 'react';
 import Header from './components/Header';
@@ -58,26 +59,25 @@ const App: FC<AppProps> = () => {
   useEffect(() => { console.log(`${ searchArr.length } recipes`) }, [ searchArr ])
 
   const getRecipes = async (searchText: string) => {
-    await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${ searchText }`)
-      .then(res => res.json())
-      .then(data => setSearchArr(data.data.recipes))
+    await axios.get(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${ searchText }`)
+      .then(res => setSearchArr(res.data.data.recipes))
       .catch(err => { throw new Error(err) })
   }
 
   const fetchRecipe: FetchFunction = async (id) => {
     // 5ed6604591c37cdc054bc886
-    await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${ id }`)
-      .then(res => res.json())
-      .then(data =>
+    await axios.get(`https://forkify-api.herokuapp.com/api/v2/recipes/${ id }`)
+      // .then(res => res.json())
+      .then(res =>
         setDisplayRecipe({
-          id: data.data.recipe.id,
-          title: data.data.recipe.title,
-          publisher: data.data.recipe.publisher,
-          sourceUrl: data.data.recipe.sourceUrl,
-          image: data.data.recipe.image_url,
-          servings: data.data.recipe.servings,
-          cookingTime: data.data.recipe.cookingTime,
-          ingredients: data.data.recipe.ingredients,
+          id: res.data.data.recipe.id,
+          title: res.data.data.recipe.title,
+          publisher: res.data.data.recipe.publisher,
+          sourceUrl: res.data.data.recipe.sourceUrl,
+          image: res.data.data.recipe.image_url,
+          servings: res.data.data.recipe.servings,
+          cookingTime: res.data.data.recipe.cookingTime,
+          ingredients: res.data.data.recipe.ingredients,
         })
       )
       .catch(err => { throw new Error(err) })
