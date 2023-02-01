@@ -2,16 +2,9 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import Item from './SearchResults/Item';
 import Recipe from './Recipe';
+import type { SearchArray } from '../types';
 
 type FetchFunction = (a: string) => void
-type SearchArray = (
-  [{
-    publisher: string,
-    image: string,
-    title: string,
-    id: string,
-  }] | ''
-)
 
 interface SearchResultsProps {
   fetchRecipe: FetchFunction
@@ -28,13 +21,13 @@ const SearchResults: React.FC<SearchResultsProps> = ({ fetchRecipe, searchArr })
   return (
     <div className="search-results">
       {
-        searchArr ?
+        searchArr[ 0 ].id ?
           <ul className="results">
             {
               searchArr.map((recipe, i) =>
-                <li key={i} className="preview" onClick={() => fetchRecipe(recipe.id)}>
+                <li key={ i } className="preview" onClick={ () => fetchRecipe(recipe.id) }>
                   <Item
-                    recipe={recipe}
+                    recipe={ recipe }
                   />
                 </li>
               )

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useGetRecipesListQuery, useGetRecipeQuery } from './services/forkify';
 import { FC, useEffect, useState } from 'react';
 import Header from './components/Header';
 import SearchResults from './components/SearchResults';
@@ -8,19 +9,12 @@ import Recipe from './components/Recipe';
 import Copyright from './components/Copyright';
 import Modal from './components/Modal';
 
+import { SearchArray } from './types';
 
-// interface AppProps {
-//   name: string
-// }
 
-type SearchArray = (
-  [{
-    publisher: string,
-    image: string,
-    title: string,
-    id: string,
-  }] | ''
-)
+interface AppProps {
+  name: string
+}
 
 type FetchFunction = (a: string) => void
 type DisplayRecipe =
@@ -42,25 +36,37 @@ type DisplayRecipe =
     ],
   }
 
-const App: FC = () => {
-  const [name, setName] = useState('Daniel')
-  const [loading, setLoading] = useState(true);
-  const [color, setColor] = useState('#ffffff')
-  const [displayRecipe, setDisplayRecipe] = useState<DisplayRecipe>('');
-  const [searchArr, setSearchArr] = useState<SearchArray>('');
+const App: FC<AppProps> = () => {
+  // Using a query hook automatically fetches data and returns query values
+  // const { data, error, isLoading } = useGetRecipesListQuery('bulbasaur')
+  // Individual hooks are also accessible under the generated endpoints:
+  // const { data, error, isLoading } = searchApi.endpoints.getRecipesList.useQuery('bulbasaur')
 
-  useEffect(() => { console.log(`${searchArr.length} recipes`) }, [searchArr])
+  const [ name, setName ] = useState('Daniel')
+  const [ loading, setLoading ] = useState(true);
+  // const [color, setColor] = useState('#ffffff') // I think this was used for the Spinner initial example
+  const [ displayRecipe, setDisplayRecipe ] = useState<DisplayRecipe>('');
+  const [ searchArr, setSearchArr ] = useState<SearchArray>(
+    [ {
+      publisher: '',
+      image: '',
+      title: '',
+      id: '',
+    } ]
+  );
 
-  const fetchQuery = (searchText: string) => {
-    fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${searchText}`)
+  useEffect(() => { console.log(`${ searchArr.length } recipes`) }, [ searchArr ])
+
+  const getRecipes = async (searchText: string) => {
+    await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${ searchText }`)
       .then(res => res.json())
       .then(data => setSearchArr(data.data.recipes))
       .catch(err => { throw new Error(err) })
   }
 
-  const fetchRecipe: FetchFunction = (id) => {
+  const fetchRecipe: FetchFunction = async (id) => {
     // 5ed6604591c37cdc054bc886
-    fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`)
+    await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${ id }`)
       .then(res => res.json())
       .then(data =>
         setDisplayRecipe({
@@ -79,11 +85,11 @@ const App: FC = () => {
 
   return (
     <div className="container">
-      <Header fetchQuery={fetchQuery} />
-      <SearchResults fetchRecipe={fetchRecipe} searchArr={searchArr} />
-      {displayRecipe ?
-        <Recipe displayRecipe={displayRecipe} /> :
-        <RecipePlaceholder name={name} />}
+      <Header getRecipes={ getRecipes } />
+      <SearchResults fetchRecipe={ fetchRecipe } searchArr={ searchArr } />
+      { displayRecipe ?
+        <Recipe displayRecipe={ displayRecipe } /> :
+        <RecipePlaceholder name={ name } /> }
       <Copyright />
       <PaginationButtons />
       <Modal />

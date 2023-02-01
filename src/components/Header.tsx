@@ -4,29 +4,42 @@ import { useState } from 'react';
 import Logo from '../img/logo.png';
 import Icons from '../img/icons.svg';
 
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { updateSearch } from '../store/search/searchSlice';
+
 interface HeaderProps {
-  fetchQuery: (a: string) => void
+  getRecipes: (a: string) => void
 }
 
-const Header: React.FC<HeaderProps> = ({ fetchQuery }) => {
-  const [searchText, setSearchText] = useState('')
-  const handleChange = e => {
+const Header: React.FC<HeaderProps> = ({ getRecipes }) => {
+  // const getRecipes = async (searchText: string) => {
+  //   await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${ searchText }`)
+  //     .then(res => res.json())
+  //     .then(data => setSearchArr(data.data.recipes))
+  //     .catch(err => { throw new Error(err) })
+  // }
+
+  // const searchText = useAppSelector((state) => state.search.value)
+  // const dispatch = useAppDispatch()
+  const [ searchText, setSearchText ] = useState('')
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchText(e.target.value)
   }
+
   return (
     <header className="header">
-      <img src={Logo} alt="Logo" className="header__logo" />
+      <img src={ Logo } alt="Logo" className="header__logo" />
       <form className="search">
         <input
           type="text"
           className="search__field"
           placeholder="Search over 1,000,000 recipes..."
-          onChange={handleChange}
-          value={searchText}
+          onChange={ handleChange }
+          value={ searchText }
         />
-        <button className="btn search__btn" onClick={() => fetchQuery(searchText)}>
+        <button className="btn search__btn" onClick={ () => getRecipes(searchText) }>
           <svg className="search__icon">
-            <use href={`${Icons}#icon-search`}></use>
+            <use href={ `${ Icons }#icon-search` }></use>
           </svg>
           <span>Search</span>
         </button>
@@ -37,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ fetchQuery }) => {
           <li className="nav__item">
             <button className="nav__btn nav__btn--add-recipe">
               <svg className="nav__icon">
-                <use href={`${Icons}#icon-edit`}></use>
+                <use href={ `${ Icons }#icon-edit` }></use>
               </svg>
               <span>Add recipe</span>
             </button>
@@ -45,7 +58,7 @@ const Header: React.FC<HeaderProps> = ({ fetchQuery }) => {
           <li className="nav__item">
             <button className="nav__btn nav__btn--bookmarks">
               <svg className="nav__icon">
-                <use href={`${Icons}#icon-bookmark`}></use>
+                <use href={ `${ Icons }#icon-bookmark` }></use>
               </svg>
               <span>Bookmarks</span>
             </button>
@@ -54,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({ fetchQuery }) => {
                 <div className="message">
                   <div>
                     <svg>
-                      <use href={`${Icons}#icon-smile`}></use>
+                      <use href={ `${ Icons }#icon-smile` }></use>
                     </svg>
                   </div>
                   <p>
