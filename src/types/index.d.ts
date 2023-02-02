@@ -33,11 +33,12 @@ export type SearchArray = (
       image: string,
       servings: string,
       cookingTime: string,
-      ingredients: 
+      ingredients: [
         {
           quantity: number,
           unit: string,
           description: string,
-        }[],
+        }
+      ],
     }
   

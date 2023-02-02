@@ -9,11 +9,14 @@ type FetchFunction = (a: string) => void
 
 interface SearchResultsProps {
   fetchRecipe: FetchFunction,
+  getRecipes: FetchFunction,
   searchArr: SearchArray
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({
   fetchRecipe,
+  getRecipes,
+  // searchArr
 }) => {
   const searchArr = useAppSelector(state => state.searchArray.list)
   const dispatch = useAppDispatch();

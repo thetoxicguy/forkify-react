@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { CSSProperties } from 'react';
 import { RingLoader } from 'react-spinners';
-import { useAppSelector, useAppDispatch } from '../store/hooks';
 
 interface SpinnerProps {
-    loadingImage: boolean
+    loading: boolean
 }
 
 const override: CSSProperties = {
@@ -15,16 +14,15 @@ const override: CSSProperties = {
     borderColor: "red",
 }
 
-const Spinner: React.FC<SpinnerProps> = () => {
-    const loadingImage = useAppSelector(state => state.loadingImage.value)
+const Spinner: React.FC<SpinnerProps> = ({ loading }) => {
     return (
         <RingLoader
-            color={ 'white' }
-            loading={ loadingImage }
-            cssOverride={ override }
+            color={'white'}
+            loading={loading}
+            cssOverride={override}
             // size={50}
             aria-label='Image is now loading'
-            data-testid={ 'loader' }
+            data-testid={'loader'}
         />
     );
 }
