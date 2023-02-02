@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios'
-import { useGetRecipesListQuery, useGetRecipeQuery } from './services/forkify';
+// import { useGetRecipesListQuery, useGetRecipeQuery } from './services/forkify';
 import { FC, useEffect, useState } from 'react';
 import Header from './components/Header';
 import SearchResults from './components/SearchResults';

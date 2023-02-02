@@ -27,13 +27,13 @@ export const recipeSlice = createSlice({
         name: 'recipe',
         initialState,
         reducers: {
-            displayRecipe: (state, action: PayloadAction<DisplayRecipe>) => {
+            updateDisplayRecipe: (state, action: PayloadAction<DisplayRecipe>) => {
                 state.rec = action.payload
             }
         }
     })
 
-    export const {displayRecipe} = recipeSlice.actions;
+    export const {updateDisplayRecipe} = recipeSlice.actions;
 
-    export const selectRecipe = (state: RootState) => state.search;
+    export const selectRecipe = (state: RootState) => state.recipe;
     export default recipeSlice.reducer;

@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import searchReducer from './search/searchSlice';
 import recipeReducer from './recipe/recipeSlice';
+import searchArrayReducer from './search/searchArraySlice';
 
 // Or from '@reduxjs/toolkit/query/react'
 import { setupListeners } from '@reduxjs/toolkit/query'
@@ -10,7 +11,8 @@ export const store = configureStore({
     reducer: {
       // Add the generated reducer as a specific top-level slice
     // [searchApi.reducerPath]: searchApi.reducer,
-    search: searchReducer,
+    searchText: searchReducer,
+    searchArray: searchArrayReducer,
     recipe: recipeReducer
     },
     // Adding the api middleware enables caching, invalidation, polling,

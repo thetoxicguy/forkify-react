@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../../src/store'
+import type { SearchArray } from '../../types'
 
 // Define a type for the slice state
 interface SearchState {
@@ -10,7 +11,7 @@ interface SearchState {
 const initialState: SearchState = {value: ''};
 
 export const searchSlice = createSlice({
-  name: 'search',
+  name: 'searchText',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {

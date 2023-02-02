@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { getRecipes, fetchRecipe } from '../services/forkify';
+
 import { useState } from 'react';
 
 import Logo from '../img/logo.png';
 import Icons from '../img/icons.svg';
 
-import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { updateSearch } from '../store/search/searchSlice';
 
 interface HeaderProps {
@@ -12,18 +14,10 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ getRecipes }) => {
-  // const getRecipes = async (searchText: string) => {
-  //   await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${ searchText }`)
-  //     .then(res => res.json())
-  //     .then(data => setSearchArr(data.data.recipes))
-  //     .catch(err => { throw new Error(err) })
-  // }
-
-  // const searchText = useAppSelector((state) => state.search.value)
-  // const dispatch = useAppDispatch()
-  const [ searchText, setSearchText ] = useState('')
+  const searchText = useAppSelector(state => state.searchText.value);
+  const dispatch = useAppDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchText(e.target.value)
+    dispatch(updateSearch(e.target.value))
   }
 
   return (

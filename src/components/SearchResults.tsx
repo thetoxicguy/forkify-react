@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { useEffect } from 'react';
 import Item from './SearchResults/Item';
 import Recipe from './Recipe';
 import type { SearchArray } from '../types';
@@ -7,16 +8,21 @@ import type { SearchArray } from '../types';
 type FetchFunction = (a: string) => void
 
 interface SearchResultsProps {
-  fetchRecipe: FetchFunction
+  fetchRecipe: FetchFunction,
+  getRecipes: FetchFunction,
   searchArr: SearchArray
 }
 
-const SearchResults: React.FC<SearchResultsProps> = ({ fetchRecipe, searchArr }) => {
-  // const [displayRecipe, setDisplayRecipe] = useState('')
-  // useEffect(() => {
-  //   console.log(displayRecipe)
-  // },
-  //   [displayRecipe])
+const SearchResults: React.FC<SearchResultsProps> = ({
+  fetchRecipe,
+  getRecipes,
+  // searchArr
+}) => {
+  const searchArr = useAppSelector(state => state.searchArray.list)
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    console.log(searchArr)
+  }, [ searchArr ])
 
   return (
     <div className="search-results">
