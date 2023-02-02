@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import searchReducer from './search/searchSlice';
 import recipeReducer from './recipe/recipeSlice';
 import searchArrayReducer from './search/searchArraySlice';
+import loadingImageReducer from './loading/loadingImageSlice'
 
 // Or from '@reduxjs/toolkit/query/react'
 import { setupListeners } from '@reduxjs/toolkit/query'
@@ -13,7 +14,8 @@ export const store = configureStore({
     // [searchApi.reducerPath]: searchApi.reducer,
     searchText: searchReducer,
     searchArray: searchArrayReducer,
-    recipe: recipeReducer
+    recipe: recipeReducer,
+    loadingImage: loadingImageReducer
     },
     // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

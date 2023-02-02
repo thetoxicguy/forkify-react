@@ -1,25 +1,9 @@
 import * as React from 'react';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { useState } from 'react';
 import Spinner from '../Spinner';
-
-type DisplayRecipe =
-    | ''
-    | {
-        id: string,
-        title: string,
-        publisher: string,
-        sourceUrl: string,
-        image: string,
-        servings: string,
-        cookingTime: string,
-        ingredients: [
-            {
-                quantity: number,
-                unit: string,
-                description: string,
-            }
-        ],
-    }
+import { DisplayRecipe } from '../../types';
+import { toggleLoadingImage } from '../../store/loading/loadingImageSlice';
 
 interface RecipeFigureProps {
     displayRecipe: DisplayRecipe
@@ -32,21 +16,22 @@ const override = {
 }
 
 const RecipeFigure: React.FC<RecipeFigureProps> = ({ displayRecipe }) => {
-    const [loading, setLoading] = useState(true);
+    const loadingImage = useAppSelector(state => state.loadingImage.value)
+    const dispatch = useAppDispatch()
     const hanleLoadedImage = () => {
-        setLoading(false)
+        dispatch(toggleLoadingImage(false))
     }
     return (
         <figure className="recipe__fig">
-            <Spinner loading={loading} />
+            <Spinner loadingImage={ loadingImage } />
             <img
-                src={typeof displayRecipe === 'string' ? '' : displayRecipe.image}
-                alt={typeof displayRecipe === 'string' ? '' : displayRecipe.title}
+                src={ displayRecipe.id === '' ? '' : displayRecipe.image }
+                alt={ displayRecipe.id === '' ? '' : displayRecipe.title }
                 className="recipe__img"
-                onLoad={hanleLoadedImage}
+                onLoad={ hanleLoadedImage }
             />
             <h1 className="recipe__title">
-                <span>{typeof displayRecipe === 'string' ? '' : displayRecipe.title}</span>
+                <span>{ displayRecipe.id === '' ? '' : displayRecipe.title }</span>
             </h1>
         </figure>
     );
