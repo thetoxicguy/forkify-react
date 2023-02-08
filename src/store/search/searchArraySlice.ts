@@ -3,7 +3,6 @@ import type { RootState } from '../../../src/store'
 import type { SearchArray } from '../../types'
 
 // Define a type for the slice state
-
 interface RecipesList {
     list: SearchArray
   }
@@ -32,5 +31,5 @@ interface RecipesList {
   export const { updateRecipes } = searchArraySlice.actions
   
   // Other code such as selectors can use the imported `RootState` type
-  export const selectSearch = (state: RootState) => state.search // .value?
+  export const selectSearchArray = (state: RootState) => state.searchArray // .value?
   export default searchArraySlice.reducer

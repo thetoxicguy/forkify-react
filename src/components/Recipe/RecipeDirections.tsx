@@ -1,23 +1,5 @@
 import * as React from 'react';
-
-type DisplayRecipe =
-    | ''
-    | {
-        id: string,
-        title: string,
-        publisher: string,
-        sourceUrl: string,
-        image: string,
-        servings: string,
-        cookingTime: string,
-        ingredients: [
-            {
-                quantity: number,
-                unit: string,
-                description: string,
-            }
-        ],
-    }
+import { DisplayRecipe } from '../../types';
 
 interface RecipeDirectionsProps {
     displayRecipe: DisplayRecipe
@@ -28,7 +10,7 @@ const RecipeDirections: React.FC<RecipeDirectionsProps> = ({ displayRecipe }) =>
         <div className="recipe__directions">
             <h2 className="heading--2">How to cook it</h2>
             <p className="recipe__directions-text">
-                This recipe was carefully designed and tested by {' '}
+                This recipe was carefully designed and tested by { ' ' }
                 <span className="recipe__publisher">{
                     typeof displayRecipe === 'string' ? 'Unknown' : displayRecipe.publisher
                 }</span>. Please check out

@@ -5,7 +5,6 @@ import searchArrayReducer from './search/searchArraySlice';
 
 // Or from '@reduxjs/toolkit/query/react'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { searchApi } from '../services/forkify';
 
 export const store = configureStore({
     reducer: {

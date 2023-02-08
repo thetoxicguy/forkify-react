@@ -2,16 +2,20 @@ declare module "*.jpg"
 declare module "*.png"
 declare module "*.svg"
 
-export type SearchArray = (
-    [{
-      publisher: string,
-      image: string,
-      title: string,
-      id: string,
-    }]
-  )
+export type SearchArray = {
+  publisher: string,
+  image: string,
+  title: string,
+  id: string,
+}[]
 
 //   export type FetchFunction = (a: string) => void
+
+export type Ingredients = {
+  quantity: number,
+  unit: string,
+  description: string,
+}[]
 
   export type DisplayRecipe =
   {
@@ -22,13 +26,7 @@ export type SearchArray = (
       image: string,
       servings: string,
       cookingTime: string,
-      ingredients: [
-        {
-          quantity: number,
-          unit: string,
-          description: string,
-        }
-      ],
+      ingredients: Ingredients
     }
   
     export type FetchFunction = (a: string) => void

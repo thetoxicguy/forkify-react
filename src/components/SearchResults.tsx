@@ -13,9 +13,9 @@ interface SearchResultsProps {
 const SearchResults: React.FC<SearchResultsProps> = ({ }) => {
   const searchArr = useAppSelector(state => state.searchArray.list)
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    console.log(searchArr)
-  }, [ searchArr ])
+  // useEffect(() => {
+  //   console.log(searchArr)
+  // }, [ searchArr ])
 
   const fetchRecipe: FetchFunction = async (id) => {
     await axios.get(`https://forkify-api.herokuapp.com/api/v2/recipes/${ id }`)

@@ -17,11 +17,12 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = () => {
   const searchText = useAppSelector(state => state.searchText.value);
   const dispatch = useAppDispatch();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updateSearch(e.target.value))
   }
 
-  const getRecipes: FetchFunction = async (searchText: string) => {
+  const handleClick: FetchFunction = async (searchText: string) => {
     await axios.get(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${ searchText }`)
       .then(res => {
         dispatch(updateRecipes(res.data.data.recipes))
@@ -40,7 +41,7 @@ const Header: React.FC<HeaderProps> = () => {
           onChange={ handleChange }
           value={ searchText }
         />
-        <button className="btn search__btn" onClick={ () => getRecipes(searchText) }>
+        <button className="btn search__btn" onClick={ () => handleClick(searchText) }>
           <svg className="search__icon">
             <use href={ `${ Icons }#icon-search` }></use>
           </svg>
