@@ -3,20 +3,14 @@ import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { useEffect } from 'react';
 import Item from './SearchResults/Item';
 import Recipe from './Recipe';
-import type { SearchArray } from '../types';
-
-type FetchFunction = (a: string) => void
+import type { SearchArray, FetchFunction } from '../types';
 
 interface SearchResultsProps {
   fetchRecipe: FetchFunction,
-  getRecipes: FetchFunction,
-  searchArr: SearchArray
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({
   fetchRecipe,
-  getRecipes,
-  // searchArr
 }) => {
   const searchArr = useAppSelector(state => state.searchArray.list)
   const dispatch = useAppDispatch();
@@ -27,11 +21,11 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   return (
     <div className="search-results">
       {
-        searchArr[ 0 ].id ?
+        searchArr[ 0 ].publisher !== 'danrolo' ?
           <ul className="results">
             {
               searchArr.map((recipe, i) =>
-                <li key={ i } className="preview" onClick={ () => fetchRecipe(recipe.id) }>
+                <li key={ i } className="preview" onClick={ () => { fetchRecipe(recipe.id) } }>
                   <Item
                     recipe={ recipe }
                   />

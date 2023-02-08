@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useAppSelector, useAppDispatch } from '../store/hooks';
-import { getRecipes, fetchRecipe } from '../services/forkify';
+// import { getRecipes, fetchRecipe } from '../services/forkify';
 
 import { useState } from 'react';
 

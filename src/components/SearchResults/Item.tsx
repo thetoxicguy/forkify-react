@@ -22,14 +22,14 @@ const Item: React.FC<ItemProps> = ({ recipe }) => {
         href="#23456"
       >
         <figure className="preview__fig">
-          <img src={Favicon} alt="Test" />
+          <img src={ Favicon } alt="Test" />
         </figure>
         <div className="preview__data">
-          <h4 className="preview__title">{recipe.title}</h4>
-          <p className="preview__publisher">{recipe.publisher}</p>
+          <h4 className="preview__title">{ recipe.title }</h4>
+          <p className="preview__publisher">{ recipe.publisher }</p>
           <div className="preview__user-generated">
             <svg>
-              <use href={`${Icons}#icon-user`}></use>
+              <use href={ `${ Icons }#icon-user` }></use>
             </svg>
           </div>
         </div>

@@ -30,24 +30,14 @@ export const fetchRecipe: FetchFunction = async (id) => {
           ingredients: res.data.data.recipe.ingredients,
         }
       ))
-      // setDisplayRecipe({
-      //   id: res.data.data.recipe.id,
-      //   title: res.data.data.recipe.title,
-      //   publisher: res.data.data.recipe.publisher,
-      //   sourceUrl: res.data.data.recipe.sourceUrl,
-      //   image: res.data.data.recipe.image_url,
-      //   servings: res.data.data.recipe.servings,
-      //   cookingTime: res.data.data.recipe.cookingTime,
-      //   ingredients: res.data.data.recipe.ingredients,
-      // })
     )
     .catch(err => { throw new Error(err) })
 }
 
 
-function updateRecipe(): any {
-  throw new Error('Function not implemented.');
-}
+// function updateRecipe(): any {
+//   throw new Error('Function not implemented.');
+// }
 // // Define a service using a base URL and expected endpoints
 // export const searchApi = createApi({
 //   reducerPath: 'search',

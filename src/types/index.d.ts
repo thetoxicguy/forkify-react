@@ -42,3 +42,4 @@ export type SearchArray = (
       ],
     }
   
+    export type FetchFunction = (a: string) => void
