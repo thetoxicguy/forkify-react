@@ -23,40 +23,16 @@ interface AppProps {
 const App: FC<AppProps> = () => {
   const dispatch = useAppDispatch()
   const displayRecipe = useAppSelector(state => state.recipe)
+  const searchArr = useAppSelector(state => state.searchArray.list)
 
   const [ name, setName ] = useState('Daniel')
   const [ loading, setLoading ] = useState(true);
   // useEffect(() => { console.log(`${ searchArr.length } recipes`) }, [ searchArr ])
 
-  const getRecipes: FetchFunction = async (searchText: string) => {
-    await axios.get(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${ searchText }`)
-      .then(res => dispatch(updateRecipes(res.data.data.recipes)))
-      .catch(err => { throw new Error(err) })
-  }
-
-  const fetchRecipe: FetchFunction = async (id) => {
-    await axios.get(`https://forkify-api.herokuapp.com/api/v2/recipes/${ id }`)
-      .then(res =>
-        dispatch(updateDisplayRecipe(
-          {
-            id: res.data.data.recipe.id,
-            title: res.data.data.recipe.title,
-            publisher: res.data.data.recipe.publisher,
-            sourceUrl: res.data.data.recipe.sourceUrl,
-            image: res.data.data.recipe.image_url,
-            servings: res.data.data.recipe.servings,
-            cookingTime: res.data.data.recipe.cookingTime,
-            ingredients: res.data.data.recipe.ingredients,
-          }
-        ))
-      )
-      .catch(err => { throw new Error(err) })
-  }
-
   return (
     <div className="container">
-      <Header getRecipes={ getRecipes } />
-      <SearchResults fetchRecipe={ fetchRecipe } />
+      <Header />
+      <SearchResults />
       { displayRecipe.rec.id !== '' ?
         <Recipe /> :
         <RecipePlaceholder name={ name } /> }

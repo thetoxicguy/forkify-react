@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useAppSelector, useAppDispatch } from '../store/hooks';
-// import { getRecipes, fetchRecipe } from '../services/forkify';
+import axios from 'axios';
+import { FetchFunction } from '../types';
+import { updateRecipes } from '../store/search/searchArraySlice';
 
 import { useState } from 'react';
 
@@ -10,14 +12,21 @@ import Icons from '../img/icons.svg';
 import { updateSearch } from '../store/search/searchSlice';
 
 interface HeaderProps {
-  getRecipes: (a: string) => void
 }
 
-const Header: React.FC<HeaderProps> = ({ getRecipes }) => {
+const Header: React.FC<HeaderProps> = () => {
   const searchText = useAppSelector(state => state.searchText.value);
   const dispatch = useAppDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updateSearch(e.target.value))
+  }
+
+  const getRecipes: FetchFunction = async (searchText: string) => {
+    await axios.get(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${ searchText }`)
+      .then(res => {
+        dispatch(updateRecipes(res.data.data.recipes))
+      })
+      .catch(err => { throw new Error(err) })
   }
 
   return (
